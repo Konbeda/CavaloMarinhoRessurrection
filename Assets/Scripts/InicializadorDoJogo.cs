@@ -23,13 +23,9 @@ public class InicializadorDoJogo : MonoBehaviour
         else
         {
             Instantiate(cavalos[Selecao.cavalo1], spawn1.position, Quaternion.Euler(0, 0, -23.33f)).GetComponent<Cavalo>().tecla = KeyCode.A;
-            Debug.Log(Selecao.cavalo1);
             Instantiate(cavalos[Selecao.cavalo2], spawn2.position, Quaternion.Euler(0, 0, -23.33f)).GetComponent<Cavalo>().tecla = KeyCode.Return;
-            Debug.Log(Selecao.cavalo2);
             Instantiate(cavalos[Selecao.cavalo3], spawn3.position, Quaternion.Euler(0, 0, -23.33f)).GetComponent<Cavalo>().tecla = KeyCode.G;
-            Debug.Log(Selecao.cavalo3);
             Instantiate(cavalos[Selecao.cavalo4], spawn4.position, Quaternion.Euler(0, 0, -23.33f)).GetComponent<Cavalo>().tecla = KeyCode.L;
-            Debug.Log(Selecao.cavalo4);
         }
     }
 }

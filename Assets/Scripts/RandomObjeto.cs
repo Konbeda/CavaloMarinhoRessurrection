@@ -21,8 +21,8 @@ public class RandomObjeto : MonoBehaviour
 
         if (tempo >= espera)
         {
-            Instantiate(lista_objeto[Random.Range(0, lista_objeto.Count + 1)], lista_spawner[Random.Range(0, lista_spawner.Count + 1)].position, Quaternion.identity);
-            espera = espera * retirada;
+            Instantiate(lista_objeto[Random.Range(0, lista_objeto.Count)], lista_spawner[Random.Range(0, lista_spawner.Count)].position, Quaternion.identity);
+            espera = espera - espera / retirada;
             tempo = 0;
         }
     }
