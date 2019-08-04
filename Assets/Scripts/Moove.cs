@@ -10,4 +10,11 @@ public class Moove : MonoBehaviour
     {
         transform.Translate(new Vector2(velocidade * Time.deltaTime, 0));
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "deletador")
+        {
+            Destroy(gameObject);
+        }
+    }
 }
