@@ -26,7 +26,17 @@ public class Cavalo : MonoBehaviour
     public SpriteRenderer imagem;
 
     public AudioSource source;
-    public AudioClip pulin, pulao, morreu;
+    public AudioClip pulin, pulao, morreu, tiro;
+
+    public bool redeLetal;
+
+    public InicializadorDoJogo inicializador;
+
+    void Start()
+    {
+        inicializador = FindObjectOfType<InicializadorDoJogo>();
+        source.PlayOneShot(tiro);
+    }
 
     void Update()
     {
@@ -66,15 +76,37 @@ public class Cavalo : MonoBehaviour
             animador.SetTrigger("pulin");
             source.PlayOneShot(pulin);
         }
+
+        if (!redeLetal)
+        {
+            timer = timer += Time.deltaTime;
+            if(timer > 5)
+            {
+                redeLetal = true;
+                timer = 0;
+            }
+        }
     }
 
-    /*public void OnTriggerStay2D(Collider2D collision)
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "rede" && redeLetal)
+        {
+            timer = timer += Time.deltaTime;
+            if(timer > 3)
+            {
+                StartCoroutine(Morrer());
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "rede")
         {
-            timer = timer += Time.deltaTime;
+            timer = 0;
         }
-    }*/
+    }
 
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -108,10 +140,15 @@ public class Cavalo : MonoBehaviour
     {
         morte.Emit(300);
         morte.gameObject.transform.parent = null;
-        source.PlayOneShot(morreu);
+        gameObject.tag = "Untagged";
         yield return new WaitForSeconds(0.1f);
+        if (!source.isPlaying)
+        {
+            source.PlayOneShot(morreu);
+        }
         imagem.color = new Color(imagem.color.r, imagem.color.g, imagem.color.b, 0);
         yield return new WaitForSeconds(1.5f);
+        inicializador.Morreu();
         Destroy(gameObject);
     }
 }

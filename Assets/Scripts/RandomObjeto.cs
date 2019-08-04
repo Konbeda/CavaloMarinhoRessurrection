@@ -33,11 +33,11 @@ public class RandomObjeto : MonoBehaviour
             }
             else if(numero == 2)
             {
-                Instantiate(meio[Random.Range(0, 3)], lista_spawner[1].position, Quaternion.identity);
+                Instantiate(meio[Random.Range(0, 4)], lista_spawner[1].position, Quaternion.identity);
             }
             else
             {
-                Instantiate(baixo[Random.Range(0, 3)], lista_spawner[2].position, Quaternion.identity);
+                Instantiate(baixo[Random.Range(0, 4)], lista_spawner[2].position, Quaternion.identity);
             }
             espera = espera - espera / retirada;
             tempo = 0;
